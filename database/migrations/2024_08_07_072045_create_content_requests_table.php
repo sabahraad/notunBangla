@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('content_requests', function (Blueprint $table) {
+            $table->id();
+            $table->string('content_title');
+            $table->text('content_description');
+            $table->string('content_date_time');
+            $table->string('content_uploader_ip');
+            $table->enum('content_status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('reference_link')->nullable();
+            $table->string('media_id')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('content_requests');
+    }
+};
